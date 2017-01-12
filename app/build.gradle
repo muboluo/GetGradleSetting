@@ -1,0 +1,37 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.1"
+    defaultConfig {
+        applicationId "set.gradle.get.getgradlesetproject"
+        minSdkVersion 14
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+
+        debug{
+
+            manifestPlaceholders = [BUILD_VERSION:"1",UMENG_CHANNEL:"umeng_set_name_1"]
+            buildConfigField "boolean","LOG_DEBUG","true"
+
+        }
+
+        release {
+            manifestPlaceholders = [BUILD_VERSION:"2",UMENG_CHANNEL:"umeng_set_name_2"]
+            minifyEnabled false
+            buildConfigField "boolean","LOG_DEBUG","false"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:24.1.1'
+}
